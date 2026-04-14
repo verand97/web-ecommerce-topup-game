@@ -82,11 +82,15 @@
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
         @foreach($categories as $cat)
         <a href="{{ route('catalog.show', $cat->slug) }}" class="glass-card p-5 flex flex-col items-center gap-3 text-center group">
-            <div class="w-16 h-16 rounded-2xl bg-linear-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/15 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
-                @php
-                    $emojis = ['mobile-legends' => '💎', 'free-fire' => '🔥', 'pubg-mobile' => '🎯', 'genshin-impact' => '✨', 'valorant' => '⚡'];
-                @endphp
-                {{ $emojis[$cat->slug] ?? '🎮' }}
+            <div class="w-16 h-16 rounded-2xl bg-linear-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/15 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform overflow-hidden">
+                @if($cat->image)
+                    <img src="{{ Storage::url($cat->image) }}" alt="{{ $cat->name }}" class="w-full h-full object-cover">
+                @else
+                    @php
+                        $emojis = ['mobile-legends' => '💎', 'free-fire' => '🔥', 'pubg-mobile' => '🎯', 'genshin-impact' => '✨', 'valorant' => '⚡'];
+                    @endphp
+                    {{ $emojis[$cat->slug] ?? '🎮' }}
+                @endif
             </div>
             <div>
                 <p class="font-semibold text-sm text-white group-hover:text-indigo-300 transition-colors">{{ $cat->name }}</p>

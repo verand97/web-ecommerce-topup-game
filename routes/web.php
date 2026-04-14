@@ -44,6 +44,10 @@ Route::post('payment/webhook', [PaymentController::class, 'webhook'])->name('pay
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [Admin\DashboardController::class, 'index'])->name('dashboard');
 
+    // Profile Settings
+    Route::get('profile', [Admin\ProfileController::class, 'index'])->name('profile');
+    Route::post('profile', [Admin\ProfileController::class, 'update'])->name('profile.update');
+
     // Categories
     Route::resource('categories', Admin\CategoryController::class);
 

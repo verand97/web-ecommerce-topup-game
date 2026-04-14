@@ -13,8 +13,14 @@
     {{-- Category Header --}}
     <div class="glass-card p-8 mb-10 flex flex-col sm:flex-row items-start sm:items-center gap-6">
         <div class="glass-card p-6 relative overflow-hidden bg-linear-to-br from-indigo-900/20 to-purple-900/10 border-indigo-500/20 md:sticky md:top-24 max-h-fit">
-            @php $emojis = ['mobile-legends'=>'💎','free-fire'=>'🔥','pubg-mobile'=>'🎯','genshin-impact'=>'✨','valorant'=>'⚡']; @endphp
-            {{ $emojis[$category->slug] ?? '🎮' }}
+            @if($category->image)
+                <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}" class="w-16 h-16 object-cover rounded-xl">
+            @else
+                @php $emojis = ['mobile-legends'=>'💎','free-fire'=>'🔥','pubg-mobile'=>'🎯','genshin-impact'=>'✨','valorant'=>'⚡']; @endphp
+                <div class="text-4xl text-center">
+                    {{ $emojis[$category->slug] ?? '🎮' }}
+                </div>
+            @endif
         </div>
         <div>
             <h1 class="text-2xl font-bold text-white mb-1">Top Up {{ $category->name }}</h1>

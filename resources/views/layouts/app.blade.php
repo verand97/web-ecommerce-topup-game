@@ -17,11 +17,7 @@
 
             {{-- Logo --}}
             <a href="{{ route('home') }}" class="flex items-center gap-3 group">
-                <div class="w-9 h-9 rounded-xl bg-linear-to-br from-indigo-500 to-purple-600 flex items-center justify-center animate-glow">
-                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                    </svg>
-                </div>
+                <img src="{{ asset('logo.png') }}" alt="Logo" class="w-9 h-9 object-contain rounded-xl" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=VS&background=6366f1&color=fff&rounded=true';">
                 <span class="font-bold text-lg tracking-wide gradient-text" style="font-family: var(--font-display)">Verand Store</span>
             </a>
 
@@ -38,23 +34,26 @@
             <div class="flex items-center gap-3">
                 @auth
                     <div class="relative group">
-                        <button class="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors">
-                            <img src="{{ auth()->user()->avatar_url }}" class="w-8 h-8 rounded-full" alt="avatar">
+                        <button class="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors py-2">
+                            <img src="{{ auth()->user()->avatar_url }}" class="w-8 h-8 rounded-full object-cover" alt="avatar">
                             <span class="hidden sm:inline max-w-[100px] truncate">{{ auth()->user()->name }}</span>
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </button>
-                        <div class="absolute right-0 top-full mt-2 w-48 glass-card py-2 hidden group-hover:block">
-                            @if(auth()->user()->isAdmin())
-                                <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-indigo-500/10 transition-colors">
-                                    ⚡ Admin Panel
-                                </a>
-                                <div class="border-t border-gray-700/50 my-1"></div>
-                            @endif
-                            <a href="{{ route('order.history') }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-indigo-500/10 transition-colors">Riwayat Pesanan</a>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="w-full text-left px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-colors">Logout</button>
-                            </form>
+                        {{-- Dropdown wrapper with padding to keep hover active --}}
+                        <div class="absolute right-0 top-full pt-1 w-48 hidden group-hover:block z-50">
+                            <div class="glass-card py-2 shadow-xl shadow-black/50">
+                                @if(auth()->user()->isAdmin())
+                                    <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-indigo-500/10 transition-colors">
+                                        ⚡ Admin Panel
+                                    </a>
+                                    <div class="border-t border-gray-700/50 my-1"></div>
+                                @endif
+                                <a href="{{ route('order.history') }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-indigo-500/10 transition-colors">Riwayat Pesanan</a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="w-full text-left px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-colors">Logout</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @else
@@ -112,9 +111,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
                 <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-xl bg-linear-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                        <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    </div>
+                    <img src="{{ asset('logo.png') }}" alt="Logo" class="w-10 h-10 object-contain rounded-xl" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=VS&background=6366f1&color=fff&rounded=true';">
                     <span class="font-bold gradient-text" style="font-family: var(--font-display)">Verand Store</span>
                 </div>
                 <p class="text-gray-400 text-sm leading-relaxed">Platform top up game terpercaya. Proses instan, harga terbaik, aman dan terjamin.</p>
