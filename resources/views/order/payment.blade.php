@@ -48,7 +48,12 @@
 @endsection
 
 @push('scripts')
-<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ $clientKey }}"></script>
+@php
+    $snapJsUrl = config('services.midtrans.is_production') 
+        ? 'https://app.midtrans.com/snap/snap.js' 
+        : 'https://app.sandbox.midtrans.com/snap/snap.js';
+@endphp
+<script src="{{ $snapJsUrl }}" data-client-key="{{ $clientKey }}"></script>
 <script>
 function snapPay() {
     const btn = document.getElementById('pay-btn');
